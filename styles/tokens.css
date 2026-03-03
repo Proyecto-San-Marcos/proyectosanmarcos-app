@@ -1,0 +1,180 @@
+/**
+ * ============================================================
+ *  PSM Design Tokens — Proyectos San Marcos
+ *  Importar en index.css con: @import "./styles/tokens.css";
+ *  Reutilizable en cualquier proyecto PSM.
+ * ============================================================
+ */
+
+
+
+:root {
+
+    /* ── Colores de marca ── */
+    --psm-navy-dark: #0a1628;
+    /* fondo oscuro principal */
+    --psm-navy: #0f2044;
+    /* secciones oscuras alternas */
+    --psm-navy-mid: #1b3068;
+    /* azul marca PSM */
+    --psm-blue: #1d4ed8;
+    /* azul acción (botones, links) */
+    --psm-blue-hover: #1e40af;
+
+    --psm-teal: #00b4d8;
+    /* acento teal (íconos, highlights) */
+    --psm-teal-light: #90e0ef;
+    /* hover teal / texto suave */
+    --psm-teal-subtle: rgba(0, 180, 216, 0.12);
+    /* fondo icono */
+
+    /* ── Neutros ── */
+    --psm-white: #ffffff;
+    --psm-gray-light: #f0f4f8;
+    /* fondos de sección clara */
+    --psm-gray-mid: #e5e7eb;
+    /* bordes, separadores */
+    --psm-text-body: #4b5563;
+    /* cuerpo de texto */
+    --psm-text-muted: #9ca3af;
+    /* texto secundario */
+
+    /* ── Tipografía ── */
+    --psm-font-body: 'Montserrat', system-ui, sans-serif;
+    --psm-font-heading: 'Oswald', 'Montserrat', sans-serif;
+
+    /* ── Espaciados de sección ── */
+    --psm-section-py: 96px;
+    /* padding-top / bottom en desktop */
+    --psm-section-py-sm: 64px;
+    /* en mobile */
+
+    /* ── Radios ── */
+    --psm-radius-sm: 6px;
+    --psm-radius-md: 12px;
+    --psm-radius-lg: 20px;
+    --psm-radius-pill: 9999px;
+
+    /* ── Sombras ── */
+    --psm-shadow-card: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --psm-shadow-card-dark: 0 4px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* ── Helpers de uso rápido ── */
+.psm-section-dark {
+    background-color: var(--psm-navy-dark);
+    color: var(--psm-white);
+}
+
+.psm-section-navy {
+    background-color: var(--psm-navy);
+    color: var(--psm-white);
+}
+
+.psm-section-light {
+    background-color: var(--psm-gray-light);
+    color: #111827;
+}
+
+.psm-section-white {
+    background-color: var(--psm-white);
+    color: #111827;
+}
+
+/* Título de sección estilo PSM (Oswald uppercase) */
+.psm-heading {
+    font-family: var(--psm-font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.15;
+}
+
+/* Ícono en círculo estilo PSM */
+.psm-icon-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--psm-teal-subtle);
+    border: 2px solid var(--psm-teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--psm-teal);
+}
+
+.psm-icon-circle--solid {
+    background: var(--psm-teal);
+    border-color: var(--psm-teal);
+    color: var(--psm-white);
+}
+
+/* Divisor de acento */
+.psm-divider {
+    width: 56px;
+    height: 4px;
+    background: var(--psm-teal);
+    border-radius: var(--psm-radius-pill);
+    margin-top: 12px;
+}
+
+/* Badge de año / etiqueta */
+.psm-badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: var(--psm-radius-pill);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--psm-teal-subtle);
+    color: var(--psm-teal);
+    border: 1px solid var(--psm-teal);
+}
+
+/* Botón primario PSM */
+.psm-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    background: var(--psm-teal);
+    color: var(--psm-white);
+    font-family: var(--psm-font-body);
+    font-weight: 700;
+    font-size: 15px;
+    border: none;
+    border-radius: var(--psm-radius-pill);
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.psm-btn-primary:hover {
+    background: var(--psm-teal-light);
+    color: var(--psm-navy-dark);
+}
+
+/* Botón secundario PSM (outline) */
+.psm-btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    background: transparent;
+    color: var(--psm-white);
+    font-family: var(--psm-font-body);
+    font-weight: 700;
+    font-size: 15px;
+    border: 2px solid var(--psm-teal);
+    border-radius: var(--psm-radius-pill);
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.psm-btn-outline:hover {
+    background: var(--psm-teal);
+    color: var(--psm-white);
+}
