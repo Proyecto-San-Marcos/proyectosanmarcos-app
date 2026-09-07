@@ -13,44 +13,48 @@ export default function App() {
         <AuthProvider>
             <Router>
                 <Routes>
-                    {/* Public Login Route */}
+                    {/* Ruta Pública de Login / Activación */}
                     <Route path="/login" element={<Login />} />
 
-                    {/* Root redirect to Login or App based on Auth in actual logic, for now forcing to Login */}
-                    <Route path="/" element={<Navigate to="/login" replace />} />
-
-                    {/* Protected Intranet Area */}
+                    {/* Ruta Principal Protegida / */}
                     <Route
-                        path="/app"
+                        path="/"
                         element={
                             <ProtectedRoute>
                                 <IntranetDashboard />
                             </ProtectedRoute>
                         }
                     >
-                        {/* Child Routes matching IntranetDashboard Outlets */}
-
-                        {/* Base general dashboard view */}
+                        {/* Vista general del dashboard en la raíz */}
                         <Route index element={<DashboardHome />} />
 
-                        {/* PMO specific route - Only Presidencia and PMO allowed */}
+                        {/* Ruta de PMO (Proyectos) */}
                         <Route
                             path="pmo"
                             element={
-                                <ProtectedRoute allowedRoles={['PMO', 'Presidencia']}>
+                                <ProtectedRoute allowedRoles={['PMO', 'Presidencia', 'Junta Directiva']}>
                                     <PmoPage />
                                 </ProtectedRoute>
                             }
                         />
 
-                        {/* Fallback internal 404/Empty pages for missing mock routes */}
-                        <Route path="*" element={
-                            <div className="flex h-64 items-center justify-center text-[var(--psm-text-secondary)]">
-                                <p>Esta sección está en construcción.</p>
-                            </div>
-                        } />
+                        {/* Secciones en desarrollo */}
+                        <Route
+                            path="*"
+                            element={
+                                <div className="flex h-64 items-center justify-center text-[var(--psm-text-body,#4b5563)] bg-white rounded-xl border border-slate-200">
+                                    <p className="font-medium text-sm">Esta sección está en construcción.</p>
+                                </div>
+                            }
+                        />
                     </Route>
 
+                    {/* Redirección de compatibilidad para rutas /app hacia / */}
+                    <Route path="/app" element={<Navigate to="/" replace />} />
+                    <Route path="/app/*" element={<Navigate to="/" replace />} />
+
+                    {/* Redirección por defecto */}
+                    <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
             </Router>
         </AuthProvider>
