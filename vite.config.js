@@ -6,6 +6,7 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  envPrefix: ['VITE_', 'NEXT_PUBLIC_'],
   server: {
     host: true,  // Esto permite que la aplicación esté disponible externamente
     port: 3000,  // Cambia el puerto si lo necesitas
