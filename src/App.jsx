@@ -1,4 +1,4 @@
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -13,6 +13,13 @@ import RegistroHorasPage from './pages/talento-humano/RegistroHorasPage';
 import LogisticaRecursosPage from './pages/finanzas/LogisticaRecursosPage';
 import RendicionCuentasPage from './pages/finanzas/RendicionCuentasPage';
 import TecnologiaAdminPage from './pages/talento-humano/TecnologiaAdminPage';
+
+// Nuevas Páginas de Sprint 3
+import CampusLmsPage from './pages/talento-humano/CampusLmsPage';
+import CertificadosPage from './pages/talento-humano/CertificadosPage';
+import RrppCrmPage from './pages/comunicaciones/RrppCrmPage';
+import AtsConvocatoriasPage from './pages/talento-humano/AtsConvocatoriasPage';
+
 import UnderConstructionPage from './pages/common/UnderConstructionPage';
 
 export default function App() {
@@ -155,17 +162,9 @@ export default function App() {
                                 />
                             }
                         />
-                        <Route
-                            path="comunicaciones/rrpp"
-                            element={
-                                <UnderConstructionPage
-                                    title="Relaciones Públicas y Directorio de Aliados"
-                                    gerencia="Gerencia de Comunicaciones"
-                                    fase="Fase 3 / Sprint 5"
-                                    description="CRM de ponentes, empresas auspiciadoras, autoridades sanmarquinas y modelos de cartas formales."
-                                />
-                            }
-                        />
+
+                        {/* RRPP y CRM de Aliados (Sprint 3) */}
+                        <Route path="comunicaciones/rrpp" element={<RrppCrmPage />} />
 
                         {/* 💵 Gerencia de Finanzas */}
                         <Route
@@ -217,39 +216,16 @@ export default function App() {
                                 />
                             }
                         />
-                        <Route
-                            path="talento-humano/campus-lms"
-                            element={
-                                <UnderConstructionPage
-                                    title="Campus Virtual (LMS PSM)"
-                                    gerencia="Talento Humano"
-                                    fase="Fase 3 / Sprint 5"
-                                    description="Talleres grabados de PMO, metodologías ágiles, liderazgo y material de formación descargable."
-                                />
-                            }
-                        />
-                        <Route
-                            path="talento-humano/certificados"
-                            element={
-                                <UnderConstructionPage
-                                    title="Emisión y Descarga de Certificados"
-                                    gerencia="Talento Humano"
-                                    fase="Fase 3 / Sprint 5"
-                                    description="Generador automático de constancias de participación oficiales en PDF con validación por código QR."
-                                />
-                            }
-                        />
-                        <Route
-                            path="talento-humano/ats"
-                            element={
-                                <UnderConstructionPage
-                                    title="Sistema de Reclutamiento (ATS)"
-                                    gerencia="Talento Humano"
-                                    fase="Fase 3 / Sprint 6"
-                                    description="Pipeline de postulantes a convocatorias, registro de entrevistas y asignación a gerencias."
-                                />
-                            }
-                        />
+
+                        {/* Campus Virtual LMS (Sprint 3) */}
+                        <Route path="talento-humano/campus-lms" element={<CampusLmsPage />} />
+
+                        {/* Emisión de Certificados QR y PDF (Sprint 3) */}
+                        <Route path="talento-humano/certificados" element={<CertificadosPage />} />
+
+                        {/* Sistema de Convocatorias y Pipeline ATS (Sprint 3) */}
+                        <Route path="talento-humano/ats" element={<AtsConvocatoriasPage />} />
+
                         <Route
                             path="talento-humano/evaluaciones"
                             element={

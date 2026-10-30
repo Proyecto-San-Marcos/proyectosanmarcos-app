@@ -7,14 +7,25 @@ import Login from '../pages/Login';
 import IntranetDashboard from '../components/IntranetDashboard';
 import DashboardHome from '../pages/DashboardHome';
 import MiPerfilPage from '../pages/perfil/MiPerfilPage';
-import PmoPage from '../pages/gerencias/PmoPage';
+import PmoDashboardPage from '../pages/pmo/PmoDashboardPage';
+import PlantillasPmoPage from '../pages/pmo/PlantillasPmoPage';
+import RegistroHorasPage from '../pages/talento-humano/RegistroHorasPage';
+import LogisticaRecursosPage from '../pages/finanzas/LogisticaRecursosPage';
+import RendicionCuentasPage from '../pages/finanzas/RendicionCuentasPage';
 import TecnologiaAdminPage from '../pages/talento-humano/TecnologiaAdminPage';
+
+// Sprint 3 Pages
+import CampusLmsPage from '../pages/talento-humano/CampusLmsPage';
+import CertificadosPage from '../pages/talento-humano/CertificadosPage';
+import RrppCrmPage from '../pages/comunicaciones/RrppCrmPage';
+import AtsConvocatoriasPage from '../pages/talento-humano/AtsConvocatoriasPage';
+
 import UnderConstructionPage from '../pages/common/UnderConstructionPage';
 
 export default function AppRoutes() {
     return (
         <Routes>
-            {/* Ruta Pública: Login / Activación (si ya está autenticado, redirige al dashboard) */}
+            {/* Ruta Pública: Login / Activación */}
             <Route
                 path="/login"
                 element={
@@ -24,7 +35,7 @@ export default function AppRoutes() {
                 }
             />
 
-            {/* Ruta Principal Protegida / (si no está autenticado, redirige a /login) */}
+            {/* Ruta Principal Protegida / */}
             <Route
                 path="/"
                 element={
@@ -75,7 +86,7 @@ export default function AppRoutes() {
                 />
 
                 {/* 📐 Gerencia de PMO */}
-                <Route path="pmo" element={<PmoPage />} />
+                <Route path="pmo" element={<PmoDashboardPage />} />
                 <Route
                     path="pmo/banco-iniciativas"
                     element={
@@ -87,17 +98,7 @@ export default function AppRoutes() {
                         />
                     }
                 />
-                <Route
-                    path="pmo/plantillas"
-                    element={
-                        <UnderConstructionPage
-                            title="Repositorio Oficial de Plantillas PMO"
-                            gerencia="Gerencia de PMO"
-                            fase="Fase 2 / Sprint 3"
-                            description="Descarga directa de Project Charter, EDT, Matriz RACI, Cronogramas y Matriz de Riesgos."
-                        />
-                    }
-                />
+                <Route path="pmo/plantillas" element={<PlantillasPmoPage />} />
                 <Route
                     path="pmo/lecciones-aprendidas"
                     element={
@@ -166,17 +167,9 @@ export default function AppRoutes() {
                         />
                     }
                 />
-                <Route
-                    path="comunicaciones/rrpp"
-                    element={
-                        <UnderConstructionPage
-                            title="Relaciones Públicas y Directorio de Aliados"
-                            gerencia="Gerencia de Comunicaciones"
-                            fase="Fase 3 / Sprint 5"
-                            description="CRM de ponentes, empresas auspiciadoras, autoridades sanmarquinas y modelos de cartas formales."
-                        />
-                    }
-                />
+
+                {/* RRPP y CRM de Aliados (Sprint 3) */}
+                <Route path="comunicaciones/rrpp" element={<RrppCrmPage />} />
 
                 {/* 💵 Gerencia de Finanzas */}
                 <Route
@@ -190,17 +183,7 @@ export default function AppRoutes() {
                         />
                     }
                 />
-                <Route
-                    path="finanzas/logistica"
-                    element={
-                        <UnderConstructionPage
-                            title="Inventario y Solicitud de Recursos"
-                            gerencia="Gerencia de Finanzas"
-                            fase="Fase 2 / Sprint 4"
-                            description="Control de bienes físicos, licencias compartidas y solicitud de aulas y auditorios en UNMSM."
-                        />
-                    }
-                />
+                <Route path="finanzas/logistica" element={<LogisticaRecursosPage />} />
                 <Route
                     path="finanzas/caja-chica"
                     element={
@@ -212,17 +195,7 @@ export default function AppRoutes() {
                         />
                     }
                 />
-                <Route
-                    path="finanzas/rendiciones"
-                    element={
-                        <UnderConstructionPage
-                            title="Módulo de Rendición de Cuentas"
-                            gerencia="Gerencia de Finanzas"
-                            fase="Fase 2 / Sprint 4"
-                            description="Carga de fotografías de boletas, facturas y comprobantes para justificar presupuestos asignados."
-                        />
-                    }
-                />
+                <Route path="finanzas/rendiciones" element={<RendicionCuentasPage />} />
 
                 {/* 👥 Gerencia de Talento Humano */}
                 <Route
@@ -236,17 +209,7 @@ export default function AppRoutes() {
                         />
                     }
                 />
-                <Route
-                    path="talento-humano/horas"
-                    element={
-                        <UnderConstructionPage
-                            title="Control de Asistencia y Registro de Horas"
-                            gerencia="Talento Humano"
-                            fase="Fase 2 / Sprint 3"
-                            description="Marcación semanal de horas dedicadas a proyectos, base para la constancia de voluntariado."
-                        />
-                    }
-                />
+                <Route path="talento-humano/horas" element={<RegistroHorasPage />} />
                 <Route
                     path="talento-humano/directorio"
                     element={
@@ -258,39 +221,16 @@ export default function AppRoutes() {
                         />
                     }
                 />
-                <Route
-                    path="talento-humano/campus-lms"
-                    element={
-                        <UnderConstructionPage
-                            title="Campus Virtual (LMS PSM)"
-                            gerencia="Talento Humano"
-                            fase="Fase 3 / Sprint 5"
-                            description="Talleres grabados de PMO, metodologías ágiles, liderazgo y material de formación descargable."
-                        />
-                    }
-                />
-                <Route
-                    path="talento-humano/certificados"
-                    element={
-                        <UnderConstructionPage
-                            title="Emisión y Descarga de Certificados"
-                            gerencia="Talento Humano"
-                            fase="Fase 3 / Sprint 5"
-                            description="Generador automático de constancias de participación oficiales en PDF con validación por código QR."
-                        />
-                    }
-                />
-                <Route
-                    path="talento-humano/ats"
-                    element={
-                        <UnderConstructionPage
-                            title="Sistema de Reclutamiento (ATS)"
-                            gerencia="Talento Humano"
-                            fase="Fase 3 / Sprint 6"
-                            description="Pipeline de postulantes a convocatorias, registro de entrevistas y asignación a gerencias."
-                        />
-                    }
-                />
+
+                {/* Campus Virtual LMS (Sprint 3) */}
+                <Route path="talento-humano/campus-lms" element={<CampusLmsPage />} />
+
+                {/* Emisión de Certificados QR y PDF (Sprint 3) */}
+                <Route path="talento-humano/certificados" element={<CertificadosPage />} />
+
+                {/* Sistema de Convocatorias y Pipeline ATS (Sprint 3) */}
+                <Route path="talento-humano/ats" element={<AtsConvocatoriasPage />} />
+
                 <Route
                     path="talento-humano/evaluaciones"
                     element={
@@ -303,7 +243,7 @@ export default function AppRoutes() {
                     }
                 />
 
-                {/* Sub-área 5: Tecnología y Optimización Digital (Administración de BD_TODOS) */}
+                {/* Sub-área 5: Tecnología y Optimización Digital */}
                 <Route path="talento-humano/tecnologia" element={<TecnologiaAdminPage />} />
 
                 {/* Alias de compatibilidad */}
@@ -319,4 +259,3 @@ export default function AppRoutes() {
         </Routes>
     );
 }
-
