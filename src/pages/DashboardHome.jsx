@@ -5,7 +5,7 @@ import { comunicadosService } from '../services/comunicadosService';
 import {
     Calendar, Clock, Download, Building, Megaphone,
     Sparkles, ArrowRight, Loader2, Pin, Tag,
-    ExternalLink, MapPin, AlertCircle, RefreshCw
+    ExternalLink, MapPin, AlertCircle, RefreshCw, GraduationCap
 } from 'lucide-react';
 
 export default function DashboardHome() {
@@ -106,7 +106,7 @@ export default function DashboardHome() {
                 <p className="text-xs font-bold text-slate-500 uppercase tracking-wider px-1">
                     Trámites y Accesos Frecuentes
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {/* Botón 1: Registrar Horas */}
                     <Link
                         to="/talento-humano/horas"
@@ -163,6 +163,25 @@ export default function DashboardHome() {
                         </div>
                         <ArrowRight size={16} className="text-slate-300 group-hover:text-[var(--psm-teal)] group-hover:translate-x-1 transition-all" />
                     </Link>
+
+                    {/* Botón 4: Campus LMS */}
+                    <Link
+                        to="/talento-humano/campus-lms"
+                        className="bg-[var(--psm-white,#ffffff)] rounded-[var(--psm-radius-md,12px)] border border-[var(--psm-gray-mid,#e5e7eb)] p-4 shadow-xs hover:shadow-md hover:border-[var(--psm-teal)] hover:-translate-y-0.5 transition-all group flex items-center justify-between"
+                    >
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                                <GraduationCap size={20} />
+                            </div>
+                            <div>
+                                <h3 className="font-bold text-sm text-[var(--psm-navy)] group-hover:text-[var(--psm-teal)] transition-colors">
+                                    Campus Virtual
+                                </h3>
+                                <p className="text-xs text-slate-400">Talleres y capacitaciones</p>
+                            </div>
+                        </div>
+                        <ArrowRight size={16} className="text-slate-300 group-hover:text-[var(--psm-teal)] group-hover:translate-x-1 transition-all" />
+                    </Link>
                 </div>
             </div>
 
@@ -180,175 +199,154 @@ export default function DashboardHome() {
                                 Muro de Comunicados Oficiales
                             </h2>
                         </div>
+                        <span className="text-xs font-semibold text-slate-400">
+                            {comunicados.length} anuncios activos
+                        </span>
                     </div>
 
                     {loadingComunicados ? (
-                        <div className="bg-[var(--psm-white,#ffffff)] rounded-[var(--psm-radius-lg,20px)] border border-[var(--psm-gray-mid,#e5e7eb)] p-12 text-center text-slate-400">
+                        <div className="bg-[var(--psm-white,#ffffff)] rounded-[var(--psm-radius-lg,20px)] border border-[var(--psm-gray-mid,#e5e7eb)] p-12 text-center">
                             <Loader2 size={32} className="animate-spin text-[var(--psm-teal)] mx-auto mb-2" />
-                            <p className="text-xs font-bold uppercase tracking-wider text-[var(--psm-navy)]">
-                                Cargando comunicados...
-                            </p>
+                            <p className="text-xs text-slate-400 font-medium">Cargando comunicados institucionales...</p>
                         </div>
                     ) : comunicados.length === 0 ? (
-                        <div className="bg-[var(--psm-white,#ffffff)] rounded-[var(--psm-radius-lg,20px)] border border-[var(--psm-gray-mid,#e5e7eb)] p-10 text-center text-slate-400 shadow-[var(--psm-shadow-card)]">
-                            <div className="w-14 h-14 rounded-full bg-[var(--psm-teal-subtle)] text-[var(--psm-teal)] mx-auto flex items-center justify-center mb-3">
-                                <Megaphone size={26} />
-                            </div>
-                            <h3 className="text-base font-bold text-[var(--psm-navy)] mb-1">
-                                No hay comunicados recientes
-                            </h3>
-                            <p className="text-xs text-slate-500 max-w-sm mx-auto">
-                                Presidencia y Comunicaciones publicarán aquí los anuncios institucionales, directivas y avisos importantes.
-                            </p>
+                        <div className="bg-[var(--psm-white,#ffffff)] rounded-[var(--psm-radius-lg,20px)] border border-[var(--psm-gray-mid,#e5e7eb)] p-8 text-center text-slate-400">
+                            <AlertCircle size={32} className="mx-auto mb-2 text-slate-300" />
+                            <p className="text-sm font-semibold text-slate-600">No hay comunicados activos por ahora.</p>
+                            <p className="text-xs text-slate-400 mt-1">Los avisos de Presidencia y Comunicaciones aparecerán aquí.</p>
                         </div>
                     ) : (
                         <div className="space-y-4">
-                            {comunicados.map((item) => {
-                                const isDestacado = Boolean(item.es_destacado);
-                                return (
-                                    <article
-                                        key={item.id}
-                                        className={`bg-[var(--psm-white,#ffffff)] rounded-[var(--psm-radius-lg,20px)] border transition-all duration-300 p-5 sm:p-6 shadow-[var(--psm-shadow-card)] ${
-                                            isDestacado
-                                                ? 'border-l-4 border-l-[var(--psm-teal,#00b4d8)] border-slate-200 bg-gradient-to-r from-cyan-50/20 to-white'
-                                                : 'border-[var(--psm-gray-mid,#e5e7eb)] hover:border-slate-300'
-                                        }`}
-                                    >
-                                        <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                                            <div className="flex items-center gap-2">
-                                                {isDestacado && (
-                                                    <span className="inline-flex items-center gap-1 text-[11px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-[var(--psm-teal)] text-white shadow-xs">
-                                                        <Pin size={11} />
-                                                        Destacado
-                                                    </span>
-                                                )}
-                                                <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700">
-                                                    {item.categoria || 'Institucional'}
+                            {comunicados.map((item) => (
+                                <article
+                                    key={item.id}
+                                    className={`bg-[var(--psm-white,#ffffff)] rounded-[var(--psm-radius-lg,20px)] border p-5 sm:p-6 shadow-[var(--psm-shadow-card)] transition-all hover:border-[var(--psm-teal)]/50 ${
+                                        item.es_destacado
+                                            ? 'border-l-4 border-l-[var(--psm-teal,#00b4d8)] border-slate-200 bg-gradient-to-r from-blue-50/30 to-white'
+                                            : 'border-slate-200'
+                                    }`}
+                                >
+                                    <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                                        <div className="flex items-center gap-2">
+                                            {item.es_destacado && (
+                                                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-800">
+                                                    <Pin size={11} className="rotate-45" />
+                                                    Fijado
                                                 </span>
-                                            </div>
-
-                                            <span className="text-xs text-slate-400 font-medium">
-                                                {formatDate(item.created_at)}
+                                            )}
+                                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-700">
+                                                <Tag size={11} />
+                                                {item.categoria || 'General'}
                                             </span>
                                         </div>
+                                        <time className="text-xs text-slate-400 font-medium">
+                                            {formatDate(item.created_at)}
+                                        </time>
+                                    </div>
 
-                                        <h3 className="text-base sm:text-lg font-bold text-[var(--psm-navy)] mb-2 hover:text-[var(--psm-teal)] transition-colors">
-                                            {item.titulo}
-                                        </h3>
+                                    <h3
+                                        className="text-base sm:text-lg font-bold text-[var(--psm-navy,#0f2044)] mb-2"
+                                        style={{ fontFamily: 'var(--psm-font-heading)' }}
+                                    >
+                                        {item.titulo}
+                                    </h3>
 
-                                        <p className="text-xs sm:text-sm text-[var(--psm-text-body)] leading-relaxed line-clamp-3 mb-4">
-                                            {item.contenido}
-                                        </p>
+                                    <p className="text-xs sm:text-sm text-[var(--psm-text-body,#4b5563)] leading-relaxed whitespace-pre-line mb-4">
+                                        {item.contenido}
+                                    </p>
 
-                                        {item.imagen_url && (
-                                            <div className="mb-4 rounded-xl overflow-hidden max-h-60 border border-slate-100">
-                                                <img
-                                                    src={item.imagen_url}
-                                                    alt={item.titulo}
-                                                    className="w-full h-full object-cover"
-                                                />
-                                            </div>
-                                        )}
-
-                                        <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400 font-medium">
-                                            <span>
-                                                Emitido por: <strong className="text-slate-700">{item.autor_nombre || 'Presidencia PSM'}</strong>
-                                            </span>
+                                    {item.imagen_url && (
+                                        <div className="my-3 rounded-xl overflow-hidden border border-slate-100 max-h-60">
+                                            <img
+                                                src={item.imagen_url}
+                                                alt={item.titulo}
+                                                className="w-full h-full object-cover"
+                                            />
                                         </div>
-                                    </article>
-                                );
-                            })}
+                                    )}
+
+                                    <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                                        <span>
+                                            Emitido por: <strong className="text-slate-600">{item.autor_nombre || 'Presidencia PSM'}</strong>
+                                        </span>
+                                    </div>
+                                </article>
+                            ))}
                         </div>
                     )}
                 </div>
 
-                {/* COLUMNA 3: CALENDARIO INSTITUCIONAL */}
-                <div className="space-y-6">
-                    <div className="bg-[var(--psm-white,#ffffff)] rounded-[var(--psm-radius-lg,20px)] border border-[var(--psm-gray-mid,#e5e7eb)] shadow-[var(--psm-shadow-card)] p-6">
-                        <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
-                            <div className="flex items-center gap-2">
-                                <Calendar size={20} className="text-[var(--psm-teal,#00b4d8)]" />
-                                <h3
-                                    className="text-base sm:text-lg font-bold text-[var(--psm-navy,#0f2044)] uppercase tracking-tight"
-                                    style={{ fontFamily: 'var(--psm-font-heading)' }}
-                                >
-                                    Próximos Eventos
-                                </h3>
-                            </div>
-                            <span className="text-xs font-bold text-[var(--psm-teal)] bg-[var(--psm-teal-subtle)] px-2.5 py-0.5 rounded-full">
-                                Agenda
-                            </span>
+                {/* COLUMNA 3: CALENDARIO DE EVENTOS */}
+                <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                            <Calendar size={20} className="text-[var(--psm-navy,#0f2044)]" />
+                            <h2
+                                className="text-lg sm:text-xl font-bold text-[var(--psm-navy,#0f2044)] uppercase tracking-tight"
+                                style={{ fontFamily: 'var(--psm-font-heading)' }}
+                            >
+                                Agenda Semanal
+                            </h2>
                         </div>
+                        <span className="text-xs font-semibold text-slate-400">
+                            Próximos
+                        </span>
+                    </div>
 
+                    <div className="bg-[var(--psm-white,#ffffff)] rounded-[var(--psm-radius-lg,20px)] border border-[var(--psm-gray-mid,#e5e7eb)] shadow-[var(--psm-shadow-card)] p-5 space-y-4">
                         {loadingEventos ? (
-                            <div className="py-8 text-center text-slate-400">
-                                <Loader2 size={24} className="animate-spin text-[var(--psm-teal)] mx-auto mb-1" />
-                                <p className="text-xs">Cargando eventos...</p>
+                            <div className="py-8 text-center">
+                                <Loader2 size={24} className="animate-spin text-[var(--psm-teal)] mx-auto mb-2" />
+                                <p className="text-xs text-slate-400">Cargando fechas importantes...</p>
                             </div>
                         ) : eventos.length === 0 ? (
                             <div className="py-8 text-center text-slate-400">
-                                <Calendar size={32} className="mx-auto mb-2 text-slate-300" />
-                                <p className="text-xs font-bold text-slate-700">No hay eventos programados</p>
-                                <p className="text-[11px] text-slate-400 mt-0.5">Las próximas entregas y talleres aparecerán aquí.</p>
+                                <Calendar size={28} className="mx-auto mb-2 text-slate-300" />
+                                <p className="text-xs font-semibold text-slate-600">No hay eventos programados</p>
+                                <p className="text-[11px] text-slate-400 mt-0.5">Disfruta tu semana de actividades regulares.</p>
                             </div>
                         ) : (
                             <div className="space-y-3">
-                                {eventos.map((ev) => {
-                                    const evDate = new Date(ev.fecha_inicio || ev.created_at);
-                                    const day = evDate.getDate();
-                                    const month = evDate.toLocaleDateString('es-PE', { month: 'short' }).toUpperCase();
-
-                                    return (
-                                        <div
-                                            key={ev.id}
-                                            className="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100"
-                                        >
-                                            {/* Badge de fecha */}
-                                            <div className="w-12 h-12 rounded-xl bg-[var(--psm-navy)] text-white flex flex-col items-center justify-center shrink-0 shadow-xs">
-                                                <span className="text-sm font-extrabold leading-none">{day}</span>
-                                                <span className="text-[10px] font-bold text-[var(--psm-teal-light)] uppercase tracking-wider">{month}</span>
-                                            </div>
-
-                                            <div className="flex-1 min-w-0">
-                                                <p className="text-xs font-bold text-[var(--psm-navy)] truncate">
-                                                    {ev.titulo}
-                                                </p>
-                                                {ev.lugar && (
-                                                    <p className="text-[11px] text-slate-500 flex items-center gap-1 mt-0.5 truncate">
-                                                        <MapPin size={11} className="shrink-0 text-slate-400" />
-                                                        <span>{ev.lugar}</span>
-                                                    </p>
-                                                )}
-                                                {ev.tipo_evento && (
-                                                    <span className="inline-block mt-1 text-[10px] font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">
-                                                        {ev.tipo_evento}
-                                                    </span>
-                                                )}
-                                            </div>
+                                {eventos.map((ev) => (
+                                    <div
+                                        key={ev.id}
+                                        className="p-3.5 rounded-xl border border-slate-100 bg-slate-50/60 hover:bg-white hover:border-[var(--psm-teal)]/40 hover:shadow-2xs transition-all space-y-1.5"
+                                    >
+                                        <div className="flex items-center justify-between">
+                                            <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--psm-teal,#00b4d8)]">
+                                                {ev.tipo_evento || 'Reunión'}
+                                            </span>
+                                            <span className="text-[11px] font-bold text-[var(--psm-navy)]">
+                                                {formatDate(ev.fecha_inicio)}
+                                            </span>
                                         </div>
-                                    );
-                                })}
+
+                                        <h3 className="font-bold text-xs text-slate-800 line-clamp-1">
+                                            {ev.titulo}
+                                        </h3>
+
+                                        {ev.descripcion && (
+                                            <p className="text-[11px] text-slate-500 line-clamp-2 leading-relaxed">
+                                                {ev.descripcion}
+                                            </p>
+                                        )}
+
+                                        {ev.lugar && (
+                                            <div className="flex items-center gap-1.5 pt-1 text-[11px] text-slate-400">
+                                                <MapPin size={12} className="shrink-0 text-slate-400" />
+                                                <span className="truncate">{ev.lugar}</span>
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
                             </div>
                         )}
-                    </div>
 
-                    {/* BANNER DE AYUDA Y SOPORTE */}
-                    <div className="bg-gradient-to-br from-[var(--psm-navy)] to-[var(--psm-navy-mid)] text-white rounded-[var(--psm-radius-lg,20px)] p-6 shadow-md relative overflow-hidden">
-                        <h4
-                            className="text-lg font-bold uppercase mb-2 tracking-tight"
-                            style={{ fontFamily: 'var(--psm-font-heading)' }}
-                        >
-                            ¿Tienes dudas con el sistema?
-                        </h4>
-                        <p className="text-xs text-slate-300 leading-relaxed mb-4">
-                            Reporta cualquier incidencia o solicita accesos a través de la Mesa de Ayuda de Tecnología.
-                        </p>
-                        <Link
-                            to="/talento-humano/tecnologia"
-                            className="psm-btn-primary w-full justify-center text-xs py-2.5 font-bold shadow-md cursor-pointer"
-                        >
-                            Ir a Mesa de Ayuda
-                        </Link>
+                        <div className="pt-2 border-t border-slate-100 text-center">
+                            <span className="text-[11px] text-slate-400 font-medium">
+                                Los eventos se sincronizan con la secretaría de Presidencia
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
