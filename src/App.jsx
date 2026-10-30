@@ -7,7 +7,11 @@ import Login from './pages/Login';
 import IntranetDashboard from './components/IntranetDashboard';
 import DashboardHome from './pages/DashboardHome';
 import MiPerfilPage from './pages/perfil/MiPerfilPage';
-import PmoPage from './pages/gerencias/PmoPage';
+import PmoDashboardPage from './pages/pmo/PmoDashboardPage';
+import PlantillasPmoPage from './pages/pmo/PlantillasPmoPage';
+import RegistroHorasPage from './pages/talento-humano/RegistroHorasPage';
+import LogisticaRecursosPage from './pages/finanzas/LogisticaRecursosPage';
+import RendicionCuentasPage from './pages/finanzas/RendicionCuentasPage';
 import TecnologiaAdminPage from './pages/talento-humano/TecnologiaAdminPage';
 import UnderConstructionPage from './pages/common/UnderConstructionPage';
 
@@ -70,7 +74,7 @@ export default function App() {
                         />
 
                         {/* 📐 Gerencia de PMO */}
-                        <Route path="pmo" element={<PmoPage />} />
+                        <Route path="pmo" element={<PmoDashboardPage />} />
                         <Route
                             path="pmo/banco-iniciativas"
                             element={
@@ -82,17 +86,7 @@ export default function App() {
                                 />
                             }
                         />
-                        <Route
-                            path="pmo/plantillas"
-                            element={
-                                <UnderConstructionPage
-                                    title="Repositorio Oficial de Plantillas PMO"
-                                    gerencia="Gerencia de PMO"
-                                    fase="Fase 2 / Sprint 3"
-                                    description="Descarga directa de Project Charter, EDT, Matriz RACI, Cronogramas y Matriz de Riesgos."
-                                />
-                            }
-                        />
+                        <Route path="pmo/plantillas" element={<PlantillasPmoPage />} />
                         <Route
                             path="pmo/lecciones-aprendidas"
                             element={
@@ -185,17 +179,7 @@ export default function App() {
                                 />
                             }
                         />
-                        <Route
-                            path="finanzas/logistica"
-                            element={
-                                <UnderConstructionPage
-                                    title="Inventario y Solicitud de Recursos"
-                                    gerencia="Gerencia de Finanzas"
-                                    fase="Fase 2 / Sprint 4"
-                                    description="Control de bienes físicos, licencias compartidas y solicitud de aulas y auditorios en UNMSM."
-                                />
-                            }
-                        />
+                        <Route path="finanzas/logistica" element={<LogisticaRecursosPage />} />
                         <Route
                             path="finanzas/caja-chica"
                             element={
@@ -207,17 +191,7 @@ export default function App() {
                                 />
                             }
                         />
-                        <Route
-                            path="finanzas/rendiciones"
-                            element={
-                                <UnderConstructionPage
-                                    title="Módulo de Rendición de Cuentas"
-                                    gerencia="Gerencia de Finanzas"
-                                    fase="Fase 2 / Sprint 4"
-                                    description="Carga de fotografías de boletas, facturas y comprobantes para justificar presupuestos asignados."
-                                />
-                            }
-                        />
+                        <Route path="finanzas/rendiciones" element={<RendicionCuentasPage />} />
 
                         {/* 👥 Gerencia de Talento Humano */}
                         <Route
@@ -231,17 +205,7 @@ export default function App() {
                                 />
                             }
                         />
-                        <Route
-                            path="talento-humano/horas"
-                            element={
-                                <UnderConstructionPage
-                                    title="Control de Asistencia y Registro de Horas"
-                                    gerencia="Talento Humano"
-                                    fase="Fase 2 / Sprint 3"
-                                    description="Marcación semanal de horas dedicadas a proyectos, base para la constancia de voluntariado."
-                                />
-                            }
-                        />
+                        <Route path="talento-humano/horas" element={<RegistroHorasPage />} />
                         <Route
                             path="talento-humano/directorio"
                             element={
