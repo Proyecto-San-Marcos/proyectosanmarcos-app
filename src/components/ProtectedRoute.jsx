@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import { useAuth } from '../context/AuthContext';
 import { Loader2 } from 'lucide-react';
@@ -9,6 +10,7 @@ export default function ProtectedRoute({ children, allowedRoles }) {
     const [isCheckingUser, setIsCheckingUser] = useState(true);
     const [activeUser, setActiveUser] = useState(null);
     const navigate = useNavigate();
+    const location = useLocation();
 
     // Verificación activa con supabase.auth.getUser()
     useEffect(() => {
@@ -22,7 +24,7 @@ export default function ProtectedRoute({ children, allowedRoles }) {
 
                 if (error || !currentUser) {
                     setActiveUser(null);
-                    navigate('/login', { replace: true });
+                    navigate('/login', { replace: true, state: { from: location } });
                 } else {
                     setActiveUser(currentUser);
                 }
@@ -30,7 +32,7 @@ export default function ProtectedRoute({ children, allowedRoles }) {
                 console.error('Error al verificar sesión activa:', err);
                 if (isMounted) {
                     setActiveUser(null);
-                    navigate('/login', { replace: true });
+                    navigate('/login', { replace: true, state: { from: location } });
                 }
             } finally {
                 if (isMounted) {
@@ -44,7 +46,7 @@ export default function ProtectedRoute({ children, allowedRoles }) {
         return () => {
             isMounted = false;
         };
-    }, [navigate]);
+    }, [navigate, location]);
 
     // Estado de carga mientras se verifica el usuario
     if (authLoading || isCheckingUser) {
@@ -62,7 +64,7 @@ export default function ProtectedRoute({ children, allowedRoles }) {
 
     // Si no hay usuario activo tras la comprobación, redirigir al login
     if (!activeUser && !user) {
-        return <Navigate to="/login" replace />;
+        return <Navigate to="/login" replace state={{ from: location }} />;
     }
 
     // Comprobación de roles específicos si la ruta lo requiere
@@ -90,3 +92,9 @@ export default function ProtectedRoute({ children, allowedRoles }) {
 
     return children;
 }
+
+ProtectedRoute.propTypes = {
+    children: PropTypes.node.isRequired,
+    allowedRoles: PropTypes.arrayOf(PropTypes.string),
+};
+

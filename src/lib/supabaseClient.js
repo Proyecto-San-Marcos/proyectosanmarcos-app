@@ -2,14 +2,19 @@ import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl =
   import.meta.env.VITE_SUPABASE_URL ||
-  import.meta.env.NEXT_PUBLIC_SUPABASE_URL ||
-  'https://uvsnieedcxndpdlyemgn.supabase.co'
+  import.meta.env.NEXT_PUBLIC_SUPABASE_URL
 
 const supabaseAnonKey =
   import.meta.env.VITE_SUPABASE_ANON_KEY ||
-  import.meta.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-  'sb_publishable_0goH98F-a867TgwfDBnExw_Av8IcZyo'
+  import.meta.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.warn(
+    'Faltan variables de entorno para Supabase. Asegúrate de configurar VITE_SUPABASE_URL y VITE_SUPABASE_ANON_KEY en tu archivo .env'
+  )
+}
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 export default supabase
+

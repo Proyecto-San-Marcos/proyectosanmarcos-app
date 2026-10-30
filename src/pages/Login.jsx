@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabaseClient';
 import { Mail, Lock, ArrowRight, UserCheck, AlertCircle, CheckCircle, Loader2, KeyRound } from 'lucide-react';
@@ -17,6 +17,8 @@ export default function Login() {
 
     const { login } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
+    const redirectPath = location.state?.from?.pathname || '/';
 
     // Iniciar Sesión convencional con Supabase Auth
     const handleLogin = async (e) => {
@@ -40,9 +42,9 @@ export default function Login() {
                 return;
             }
 
-            // Redireccionar a la ruta principal protegida
-            navigate('/');
-        } catch (err) {
+            // Redireccionar a la ruta principal protegida o a la solicitada previamente
+            navigate(redirectPath, { replace: true });
+        } catch {
             setError('Error de conexión al servidor. Inténtalo más tarde.');
         } finally {
             setIsLoading(false);
@@ -137,7 +139,7 @@ export default function Login() {
                     `¡Hola ${matchedMember.nombres}! Tu cuenta ha sido activada con éxito. Redirigiendo a la intranet para que configures tu contraseña personal...`
                 );
                 setTimeout(() => {
-                    navigate('/');
+                    navigate(redirectPath, { replace: true });
                 }, 1500);
             } else {
                 setSuccessMessage(
